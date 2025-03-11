@@ -1,0 +1,54 @@
+# version: '3'
+ 
+services:
+  airflow:
+    image: apache/airflow:latest
+    environment:
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__WEBSERVER__RBAC=True
+      - _AIRFLOW_WWW_USER_CREATE=True  # Ensures a user is created
+      - _AIRFLOW_WWW_USER_USERNAME=admin
+      - _AIRFLOW_WWW_USER_PASSWORD=admin
+      - _AIRFLOW_WWW_USER_EMAIL=admin@example.com
+      - _AIRFLOW_WWW_USER_ROLE=Admin
+    volumes:
+      - ./dags:/opt/airflow/dags
+#       - ./logs:/opt/airflow/logs
+#       - ./plugins:/opt/airflow/plugins
+    ports:
+      - "8080:8080"
+
+
+    networks:
+      - backend
+
+    command: airflow standalone
+
+  mysql:
+
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass #--> this is example
+      MYSQL_DATABASE: test
+      MYSQL_USER: airflow
+      MYSQL_PASSWORD: airflow
+
+    ports:
+      - "3307:3306"
+
+
+    networks:
+      - backend
+    # command: mysql standalone
+
+networks:
+  backend:
+    driver: bridge
+
+
+
+
+
+
+# ======================================
+

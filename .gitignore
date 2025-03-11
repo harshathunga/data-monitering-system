@@ -1,0 +1,14 @@
+
+.env
+__pycache__/h.cpython-312.pyc
+/logs/dag_processor_manager
+*.log
+test.py
+main.py
+.ipynb_checkpoints/etl-checkpoint.ipynb
+dags/__pycache__/dms.cpython-312.pyc
+.ipynb_checkpoints/Untitled-checkpoint.ipynb
+requirement.txt
+Untitled.ipynb
+h.py
+.vscode/settings.json
